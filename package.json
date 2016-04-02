@@ -1,0 +1,40 @@
+{
+  "name": "angular-tabs",
+  "version": "1.0.0",
+  "description": "Angular Tabs, Javascript, custom Tabs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/varit05/angular-tabs.git"
+  },
+  "author": "varitpatel@gmail.com",
+  "bugs": {
+    "url": "https://github.com/varit05/angular-tabs/issues"
+  },
+  "homepage": "https://github.com/varit05/angular-tabs#readme",
+  "devDependencies": {
+    "browser-sync": "*",
+    "del": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-concat": "*",
+    "gulp-concat-css": "*",
+    "gulp-inject": "^1.1.1",
+    "gulp-jshint": "*",
+    "gulp-minify-css": "*",
+    "gulp-notify": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*",
+    "gulp-sourcemaps": "*",
+    "run-sequence": "*",
+    "gulp-util": "*",
+    "gulp-serve": "*",
+    "gulp-useref": "*",
+    "gulp-plumber": "*",
+    "wiredep-cli": "*",
+    "gulp-load-plugins": "*"
+  }
+}

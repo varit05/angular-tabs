@@ -1,0 +1,32 @@
+{
+  "name": "Angular-tabs",
+  "homepage": "https://github.com/varit05/angular-tabs",
+  "authors": [
+    "varitpatel@gmail.com"
+  ],
+  "description": "AngularJS, Custom Tabs",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "angular",
+    "javascript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.1",
+    "angular-sanitize": "~1.5.1",
+    "angular-touch": "~1.5.1",
+    "modernizr-ie": "git://github.com/suderman/modernizr-ie",
+    "modernizr-retina-test": "git://github.com/joaocunha/modernizr-retina-test.git#1.0.0"
+  },
+  "resolutions": {
+    "angular": "~1.5.1"
+  }
+}
