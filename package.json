@@ -34,7 +34,10 @@
     "gulp-serve": "*",
     "gulp-useref": "*",
     "gulp-plumber": "*",
-    "wiredep-cli": "*",
-    "gulp-load-plugins": "*"
+    "wiredep": "*",
+    "gulp-load-plugins": "*",
+    "gulp-clean": "*",
+    "gulp-connect": "*",
+    "http-proxy-middleware": "*"
   }
 }

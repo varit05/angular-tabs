@@ -9,7 +9,11 @@ var gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     serve = require('gulp-serve'),
     plugins = require('gulp-load-plugins')(),
-    wiredep = require('wiredep-cli');
+    inject = require('gulp-inject'),
+    clean = require('gulp-clean'),
+    connect = require('gulp-connect'),
+    proxy = require('http-proxy-middleware'),
+    wiredep = require('wiredep');
 
 gulp.task('scripts', function() {
     return gulp.src('src/js/*.js')
@@ -35,27 +39,24 @@ gulp.task('sass', function(){
     return gulp.src('src/scss/**/*.scss')
         .pipe(plumber())
         .pipe(sass()) // Using gulp-sass
+        .pipe(concat('main.css'))
         .pipe(gulp.dest('dist/css'))
 });
 
-//gulp.task('html', function () {
-//    return gulp.src('src/*.html')
-//        .pipe(useref())
-//        .pipe(gulp.dest('dist'));
-//});
+gulp.task('html', function () {
+
+    var target = gulp.src('src/index.html');
+
+    var sources = gulp.src(['dist/**/*.js', 'dist/**/*.css'], {read: false});
+    return target.pipe(inject(sources))
+        .pipe(gulp.dest('dist'));
+});
 
 gulp.task('wiredep', function() {
 
     var wiredep = require('wiredep').stream;
 
-    //gulp.src('src/*.html')
-    //    .pipe(wiredep({
-    //        directory: 'dist/bower_components',
-    //        exclude: ['bootstrap-sass-official'],
-    //        ignorePath: /^(\.\.\/)*\.\./
-    //    }))
-    //    .pipe(gulp.dest('dist'));
-    return gulp.src('src/index.html')
+    return gulp.src('dist/index.html')
         .pipe(wiredep({
             fileTypes: {
                 html: {
@@ -69,25 +70,41 @@ gulp.task('wiredep', function() {
                     }
                 }
             }
-        }))
+        }));
 
-        .pipe(plugins.inject(
-            gulp.src(['src/**/*.js'], { read: false }), {
-                addRootSlash: false,
-                transform: function(filePath, file, i, length) {
-                    return '<script src="' + filePath.replace('dist/js/', '') + '"></script>';
-                }
-            }))
+        //.pipe(plugins.inject(
+        //    gulp.src(['src/**/*.js'], { read: false }), {
+        //        addRootSlash: false,
+        //        transform: function(filePath) {
+        //            return '<script src="' + filePath.replace('dist/js/', '') + '"></script>';
+        //        }
+        //    }))
+        //
+        //.pipe(plugins.inject(
+        //    gulp.src(['src/**/*.scss'], { read: false }), {
+        //        addRootSlash: false,
+        //        transform: function(filePath) {
+        //            return '<link rel="stylesheet" href="' + filePath.replace('dist/css/', '') + '"/>';
+        //        }
+        //    }))
 
-            .pipe(plugins.inject(
-                gulp.src(['src/**/*.scss'], { read: false }), {
-                    addRootSlash: false,
-                    transform: function(filePath, file, i, length) {
-                        return '<link rel="stylesheet" href="' + filePath.replace('dist/css/', '') + '"/>';
-                    }
-                }))
+        //.pipe(gulp.dest('dist'));
+});
 
-            .pipe(gulp.dest('dist'));
+gulp.task('connect', function() {
+    connect.server({
+        port: 3000,
+        root: 'dist',
+        livereload: true,
+        middleware: function(connect, opt) {
+            return [
+                proxy('/api', {
+                    target: 'http://localhost:3000',
+                    changeOrigin:true
+                })
+            ]
+        }
+    });
 });
 
 // Rerun the task when a file changes
@@ -95,7 +112,11 @@ gulp.task('watch', function() {
     gulp.watch('src/js/*.js', ['scripts']);
 });
 
-gulp.task('serve', serve('dist'));
+//gulp.task('clean', function() {
+//    return gulp.src('dist/index.html')
+//        .pipe(clean());
+//});
+
 
 // create a default task and just log a message
-gulp.task('default', ['jshint', 'scripts', 'sass', 'wiredep', 'serve', 'watch']);
+gulp.task('default', ['jshint', 'scripts', 'sass', 'html', 'wiredep', 'connect', 'watch']);
