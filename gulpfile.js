@@ -21,13 +21,18 @@ gulp.task('connect', function() {
 });
 
 gulp.task('html', function () {
-    var sources = gulp.src(['dist/js/**/*.js', 'dist/css/**/*.css'], {read: false});
+    var sources = gulp.src(['./dist/js/**/*.js', './dist/css/**/*.css'], {read: false});
+
+    var injectOptions = {
+        ignorePath : '/dist'
+    };
 
     gulp.src('src/index.html')
         .pipe(wiredep({
-            directory: 'dist/bower_components'
+            directory: 'dist/bower_components',
+            ignorePath: './dist'
         }))
-        .pipe(inject(sources))
+        .pipe(inject(sources, injectOptions))
         .pipe(gulp.dest('dist'));
 });
 
