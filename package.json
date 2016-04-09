@@ -16,6 +16,7 @@
   "homepage": "https://github.com/varit05/angular-tabs#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^1.8.0",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat-css": "^2.2.0",
     "gulp-connect": "^3.2.2",
@@ -24,7 +25,13 @@
     "gulp-livereload": "^3.8.1",
     "gulp-sass": "^2.2.0",
     "gulp-watch": "^4.3.5",
+    "jasmine": "^2.4.1",
+    "jasmine-core": "^2.4.1",
     "jshint": "^2.9.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^0.3.8",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
     "wiredep": "^4.0.0"
   }
 }

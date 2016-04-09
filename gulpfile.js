@@ -9,7 +9,9 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     inject = require('gulp-inject'),
     connect = require('gulp-connect'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    server = require('karma').Server,
+    templateCache = require('gulp-angular-templatecache');
 
 //connect task
 gulp.task('connect', function() {
@@ -52,6 +54,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     return gulp.src('src/js/*.js')
         .pipe(jshint())
+        .pipe(jshint.reporter())
         .pipe(gulp.dest('dist/js'))
         .pipe(connect.reload());
 });
@@ -63,5 +66,24 @@ gulp.task('watch', function() {
     gulp.watch('src/index.html', ['html']);
 });
 
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  new server({
+    configFile: require('path').resolve('karma.conf.js'),
+    singleRun: true
+  }, done).start();
+});
+
+/**
+ * Run TemplateCache Task
+ */
+gulp.task('html2js', function () {
+     gulp.src('src/html/**/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('dist/js'));
+});
+
 //default gulp task
-gulp.task('default', ['js', 'css', 'html', 'connect', 'watch']);
+gulp.task('default', ['js', 'css', 'html2js', 'html', 'connect', 'watch']);

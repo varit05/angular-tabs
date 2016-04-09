@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "angular": "~1.5.3",
+    "angular-mocks": "~1.5.3",
     "angular-sanitize": "~1.5.3",
     "angular-touch": "~1.5.3"
   },
