@@ -13,6 +13,9 @@ branches:
   only:
     - master
 
+script:
+  - gulp test
+
 notifications:
   email:
     - varitpatel@gmail.com
