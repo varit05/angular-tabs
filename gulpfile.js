@@ -81,7 +81,10 @@ gulp.task('test', function (done) {
  */
 gulp.task('html2js', function () {
      gulp.src('src/html/**/*.html')
-    .pipe(templateCache())
+    .pipe(templateCache({
+        module: 'shared.ui',
+        standalone: true
+    }))
     .pipe(gulp.dest('dist/js'));
 });
 

@@ -1,5 +1,5 @@
-angular.module('tabs', [])
-.component('tabs', {
+angular.module('app.tabs', ['shared.ui'])
+.component('myTabs', {
   transclude: true,
   controller: function() {
     var panes = this.panes = [];
@@ -18,7 +18,7 @@ angular.module('tabs', [])
   },
   templateUrl: 'tabs.html'
 })
-.component('tab', {
+.component('myPane', {
   transclude: true,
   require: {
     tabsCtrl: '^myTabs'
@@ -29,7 +29,6 @@ angular.module('tabs', [])
   controller: function() {
     this.$onInit = function() {
       this.tabsCtrl.addPane(this);
-      console.log(this);
     };
   },
   templateUrl: 'tab.html'

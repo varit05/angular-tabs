@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="tabs">
+<html ng-app="app.tabs">
 <head>
     <meta charset="utf-8">
     <title>Angular Tabs</title>
@@ -23,6 +23,16 @@
 
     <h1>Gulp Project</h1>
 
-    <tabs></tabs>
+    <my-tabs>
+        <my-pane title="Hello">
+            <h4>Hello</h4>
+            <p>Lorem ipsum dolor sit amet</p>
+        </my-pane>
+        <my-pane title="World">
+            <h4>World</h4>
+            <em>Mauris elementum elementum enim at suscipit.</em>
+            <p><a href ng-click="i = i + 1">counter: {{i || 0}}</a></p>
+      </my-pane>
+    </my-tabs>
 </body>
 </html>
