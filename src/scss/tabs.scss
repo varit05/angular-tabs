@@ -1,6 +1,15 @@
-body {
-  background: linear-gradient(45deg, #fff, #ccc);
-}
-.testing {
-  width: percentage(1/2);
+@import url("http://fonts.googleapis.com/css?family=Lato");
+
+.tab {
+	&--title {
+	    display: inline-block;
+	    padding: 0;
+
+	    li {
+	        list-style-type: none;
+	        display: inline-block;
+	        padding: 5px 10px;
+	        border: 1px solid #D9d9d9;
+	    }
+	}
 }
